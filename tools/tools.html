@@ -1,0 +1,93 @@
+<div class="card">
+  <div class="card-body">
+    <h1 class="card-title">Tools & Resources</h1>
+    <p class="card-text">This page is currently under construction.</p>
+  </div>
+</div>
+
+<script>
+  function loadSOP(title, path) {
+    fetch(path)
+      .then(response => {
+        if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
+        return response.text();
+      })
+      .then(content => {
+        // Get the converter from the window object
+        const converter = window.converter || new showdown.Converter({
+          tables: true, 
+          strikethrough: true,
+          tasklists: true
+        });
+        
+        const html = `<div class="card">
+                        <div class="card-body">
+                          <h1 class="card-title">${title}</h1>
+                          <div class="card-text">${converter.makeHtml(content)}</div>
+                          <a href="#" onclick="navigate('tools')" class="btn btn-primary mt-3">Back to Tools</a>
+                        </div>
+                      </div>`;
+        document.getElementById('content-container').innerHTML = html;
+        
+        // Rerun MathJax if needed
+        if (window.MathJax) {
+          MathJax.typesetPromise();
+        }
+      })
+      .catch(error => {
+        console.error("Error loading SOP:", error);
+        document.getElementById('content-container').innerHTML = 
+          `<div class="alert alert-danger">Failed to load SOP: ${error.message}</div>`;
+      });
+  }
+
+  function loadChemicalInventory() {
+    fetch('chemicals/chemicals.md')
+      .then(response => {
+        if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
+        return response.text();
+      })
+      .then(content => {
+        // Get the converter from the window object
+        const converter = window.converter || new showdown.Converter({
+          tables: true, 
+          strikethrough: true,
+          tasklists: true
+        });
+        
+        const html = `<div class="card">
+                        <div class="card-body">
+                          <h1 class="card-title">Chemical Inventory</h1>
+                          <div class="card-text">${converter.makeHtml(content)}</div>
+                          <a href="#" onclick="navigate('tools')" class="btn btn-primary mt-3">Back to Tools</a>
+                        </div>
+                      </div>`;
+        document.getElementById('content-container').innerHTML = html;
+        
+        // Rerun MathJax if needed
+        if (window.MathJax) {
+          MathJax.typesetPromise();
+        }
+      })
+      .catch(error => {
+        console.error("Error loading chemical inventory:", error);
+        document.getElementById('content-container').innerHTML = 
+          `<div class="alert alert-danger">Failed to load chemical inventory: ${error.message}</div>`;
+      });
+  }
+
+  function calculateExposure() {
+    const dose = parseFloat(document.getElementById('doseInput').value);
+    const intensity = parseFloat(document.getElementById('intensityInput').value);
+    
+    if (isNaN(dose) || isNaN(intensity) || intensity <= 0) {
+      document.getElementById('exposureResult').innerHTML = 
+        'Please enter valid numbers (intensity must be > 0)';
+      return;
+    }
+    
+    const exposureTime = dose / intensity;
+    document.getElementById('exposureResult').innerHTML = 
+      `Exposure time: <strong>${exposureTime.toFixed(1)} seconds</strong>`;
+  }
+</script>
