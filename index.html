@@ -2,378 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lincoln Scheer - Personal Website</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <!-- MathJax for rendering mathematical expressions -->
-  <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lincoln Scheer</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
   <style>
-    /* Custom color palette - Blue theme with green accents */
-    :root {
-      --primary-blue: #1a4b84;      /* Dark blue - primary color */
-      --secondary-blue: #2c75b3;    /* Medium blue - secondary color */
-      --light-blue: #add8e6;        /* Light blue - backgrounds */
-      --accent-green: #2e8b57;      /* Sea green - accent color */
-      --light-green: #98fb98;       /* Light green - highlights */
-      --very-light-blue: #e6f2ff;   /* Very light blue - for navbar */
-      
-      /* Default text and background */
-      --text: #333333;
-      --light-bg: #f0f8ff;          /* Alice blue - light background */
-      --white: #ffffff;
-    }
-
     body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: var(--light-bg);
-      color: var(--text);
-      line-height: 1.6;
+      background: #121212;
+      color: #e0e0e0;
+      font-family: monospace;
     }
-
-    header {
-      background: var(--primary-blue);
-      color: var(--white);
-      text-align: center;
-      padding: 40px 0 20px;
-      border-bottom: 4px solid var(--accent-green);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-
-    header p {
-      margin: 10px 0 0;
-      font-size: 1.2em;
-      font-weight: 500;
-      color: var(--light-blue);
-    }
-
-    /* Top Navigation Bar - Fixed for visibility */
-    nav.navbar {
-      background-color: var(--very-light-blue);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      margin-bottom: 10px;
-    }
-    
-    nav.navbar .navbar-brand {
-      color: var(--primary-blue);
-      font-weight: bold;
-      padding: 8px 15px;
-      border-radius: 4px;
-    }
-    
-    nav.navbar .navbar-brand:hover {
-      color: var(--accent-green);
-      background-color: rgba(46, 139, 87, 0.1);
-    }
-    
-    nav.navbar .nav-link {
-      color: var(--secondary-blue) !important;
-      font-weight: 500;
-      margin: 0 3px;
-      padding: 8px 15px;
-      border-radius: 4px;
-      transition: all 0.2s ease;
-    }
-    
-    nav.navbar .nav-link:hover {
-      color: var(--accent-green) !important;
-      background-color: rgba(46, 139, 87, 0.1);
-    }
-    
-    nav.navbar .navbar-toggler {
-      border-color: var(--secondary-blue);
-    }
-
-    nav.navbar .navbar-toggler i {
-      color: var(--secondary-blue);
-    }
-
-    /* Container for main content */
-    .container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 20px;
-      background: var(--white);
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      border-left: 2px solid var(--light-blue);
-      border-right: 2px solid var(--light-blue);
-    }
-
-    /* Basic card style for loaded content */
-    .card {
-      border: none;
-      border-top: 3px solid var(--secondary-blue);
-    }
-    
-    .card-body {
-      background-color: var(--white);
-    }
-    
-    .card-title {
-      color: var(--primary-blue);
-    }
-
-    /* Enhanced table styling */
-    table {
-      width: 100%;
-      margin-bottom: 1.5rem;
-      border-collapse: collapse;
-    }
-    
-    table th,
-    table td {
-      padding: 1rem;
-      vertical-align: top;
-      border-top: 1px solid #dee2e6;
-    }
-    
-    table thead th {
-      border-bottom: 2px solid var(--secondary-blue);
-      background-color: var(--light-bg);
-    }
-    
-    table tbody tr:nth-of-type(odd) {
-      background-color: rgba(173, 216, 230, 0.1); /* Light blue tint */
-    }
-    
-    table tbody tr:hover {
-      background-color: rgba(152, 251, 152, 0.2); /* Light green tint */
-    }
-    
-    table a {
-      color: var(--secondary-blue);
-      text-decoration: none;
-      font-weight: 500;
-    }
-    
-    table a:hover {
-      color: var(--accent-green);
-      text-decoration: underline;
-    }
-
-    /* Profile styling */
-    .profile-image {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 20px auto;
-      display: block;
-      border: 3px solid var(--accent-green);
-    }
-    
-    .social-links {
-      text-align: center;
-      margin-top: 15px;
-    }
-    
-    .social-links a {
-      display: inline-block;
-      margin: 0 10px;
-      color: var(--primary-blue);
-      font-size: 1.2em;
-    }
-    
-    .social-links a:hover {
-      color: var(--accent-green);
-    }
-
-    /* Links styling */
-    a {
-      color: var(--secondary-blue);
-      transition: color 0.3s;
-    }
-    
-    a:hover {
-      color: var(--accent-green);
-      text-decoration: underline;
-    }
-
-    footer {
-      background: var(--primary-blue);
-      color: var(--white);
-      text-align: center;
-      padding: 10px 0;
-      margin-top: 40px;
-      border-top: 3px solid var(--accent-green);
-    }
-    
-    footer a {
-      color: var(--light-blue);
-      text-decoration: none;
-    }
-    
-    footer a:hover {
-      color: var(--light-green);
-      text-decoration: underline;
-    }
-
-    /* Custom buttons with theme colors */
-    .btn-primary {
-      background-color: var(--secondary-blue);
-      border-color: var(--primary-blue);
-    }
-    
-    .btn-primary:hover {
-      background-color: var(--primary-blue);
-      border-color: var (--primary-blue);
-    }
-    
-    .btn-accent {
-      background-color: var(--accent-green);
-      border-color: var(--accent-green);
-      color: white;
-    }
-    
-    .btn-accent:hover {
-      background-color: #246d43;
-      border-color: #246d43;
-      color: white;
-    }
+    a { color: #801f7a; text-decoration: underline; }
+    a:hover { text-decoration: underline; }
+    .card { background: #d2d2d2; border: none; }
+    .btn-outline-info { font-family: monospace; }
   </style>
 </head>
-<body>
-  <!-- Header -->
-  <header>
-    <h1>Lincoln Scheer</h1>
-    <p>Computer Engineer & Researcher</p>
-  </header>
+<body class="d-flex flex-column min-vh-100">
 
-  <!-- Top Navbar -->
-  <nav class="navbar navbar-expand-lg">
-    <div class="container d-flex justify-content-between">
-      <a class="navbar-brand" href="#" onclick="navigate('home')">Home</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" 
-              data-target="#navbarNav" aria-controls="navbarNav" 
-              aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon">
-          <!-- Simple hamburger icon since the default might not be visible -->
-          <i style="font-style: normal;">≡</i>
-        </span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="#" onclick="navigate('projects')">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="navigate('papers')">Publications</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="navigate('blog')">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="navigate('tools')">Tools</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="navigate('resume')">Resume</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="navigate('contact')">Contact</a></li>
+  <!-- Main Content -->
+  <main class="container my-5 flex-grow-1">
+
+    <section id="about" class="mb-5">
+      <h1>Lincoln Scheer</h1>
+      <p>Computer Engineer & Researcher</p>
+    </section>
+
+    <section id="intro" class="mb-5">
+        <h3>Welcome to my personal website!</h3>
+        <p>I'm Lincoln Scheer, a Computer Engineering student at Fort Lewis College in Durango, Colorado.</p>
+        <h3>About Me</h3>
+        <p>I am a senior BSCE student at Fort Lewis College.</p>
+
+        <p>I have experience in various programming languages, including:</p>
+
+        <ul>
+            <li>Python</li>
+            <li>C++</li>
+            <li>C#</li>
+            <li>C</li>
+            <li>AVR Assembly</li>
+            <li>x86_64 Assembly</li>
+            <li>MATLAB</li>
+            <li>Verilog</li>
         </ul>
-      </div>
-    </div>
-  </nav>
 
-  <!-- Main Content Area -->
-  <div class="container" id="content-container">
-    <!-- Content dynamically loaded by JavaScript -->
-  </div>
+        <p>Additionally, I am proficient in several electronic design automation (EDA) tools, such as Autodesk Eagle, LT Spice, and Electric VLSI, and experience with Cadence Design Suite.</p>
+            
+        <p>I also have experience working with microcontrollers for environmental air-quality applications. On top of that, I have hands-on expertise in nano-fabrication and I just wrapped up two-semesters of overseeing photolithography processes for our senior project, where successfully built functional PMOS MOSFETs.</p>
+    
+        <h3>Hobbies</h3>
 
-  <!-- Footer -->
-  <footer>
-    <div>© <span id="current-year">2023</span> Lincoln Scheer - <span id="footer-update">Last Updated: fetching...</span></div>
-    <div>Contact me at <a href="mailto:lincoln.cobra@gmail.com">lincoln.cobra@gmail.com</a></div>
-  </footer>
+        <p>In my free time I enjoy hiking, biking, and hanging out with my girlfriend and our dog, Hyperion. I also enjoy writing rendering engines and game engines. I have a few projects on <a href="https://github.com/bikelinc">GitHub</a> that I am working on.</p>
 
-  <!-- Script for dynamic content, last-updated text, and MathJax reprocessing -->
-  <script>
-    // Update current year automatically
-    document.getElementById('current-year').innerText = new Date().getFullYear();
+        <h3>Projects</h3>
 
-    // Update last modified date
-    document.getElementById('footer-update').innerText = `Last Updated: ${document.lastModified}`;
-  </script>
-
-  <!-- Showdown for Markdown rendering -->
-  <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
-  <script>
-    const routes = {
-      home: 'pages/index.md',
-      projects: 'pages/proj.md',
-      papers: 'pages/pubs.md',
-      blog: 'pages/blog.md',
-      resume: 'pages/resume.md',
-      contact: 'pages/contact.md',
-      tools: 'tools/tools.html',
-      blogPost: 'templates/blog-template.html'
-    };
-
-    // Create a Showdown converter with table support
-    const converter = new showdown.Converter({
-      tables: true,
-      strikethrough: true,
-      tasklists: true
-    });
-    converter.setFlavor('github');
-
-    // Make converter globally accessible
-    window.converter = converter;
-
-    async function loadContent(route, params = {}) {
-      try {
-        const response = await fetch(routes[route]);
-        if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
-        
-        let text = await response.text();
-        let html = '';
-
-        if (route === 'blogPost') {
-          html = text.replace('{{title}}', params.title)
-                     .replace('{{content}}', converter.makeHtml(params.content));
-        } else if (routes[route].endsWith('.md')) {
-          html = `<div class="card">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
                     <div class="card-body">
-                      ${converter.makeHtml(text)}
+                        <h5 class="card-title">Academic Projects</h5>
+                        <ul>
+                            <li>PMOS MOSFET Fabrication – Led photolithography and fabrication processes for senior project.</li>
+                            <li>Microcontroller-based Air Quality Monitoring – Developed embedded systems for environmental data collection.</li>
+                            <li>EDA Tool Proficiency – Designed circuits using Autodesk Eagle, LT Spice, Electric VLSI, and Cadence.</li>
+                        </ul>
                     </div>
-                  </div>`;
-        } else {
-          html = text; // If it's HTML
-        }
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Personal & Web Projects</h5>
+                        <ul>
+                            <li><a href="https://flcnanolab.github.io/">Fort Lewis College Nanofabrication Lab Website</a></li>
+                            <li><a href="https://chloewalsh.net/">Chloe Walsh - Portfolio</a></li>
+                            <li><a href="https://github.com/BikeLinc/NelsonEngine">Nelson Engine</a></li>
+                            <li><a href="https://github.com/BikeLinc/BuildTool">BuildTool</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        document.getElementById('content-container').innerHTML = html;
-        
-        // Rerun MathJax after content load
-        if (window.MathJax) {
-          MathJax.typesetPromise();
-        }
-      } catch (error) {
-        console.error("Error loading content:", error);
-        document.getElementById('content-container').innerHTML = 
-          `<div class="alert alert-danger">Failed to load content: ${error.message}</div>`;
-      }
-    }
+    </section>
 
-    async function loadBlogPost(title, link) {
-      try {
-        const response = await fetch(link);
-        if (!response.ok) throw new Error(`Network response was not ok: ${response.status}`);
-        
-        const content = await response.text();
-        loadContent('blogPost', { title, content });
-      } catch (error) {
-        console.error("Error loading blog post:", error);
-        document.getElementById('content-container').innerHTML = 
-          `<div class="alert alert-danger">Failed to load blog post: ${error.message}</div>`;
-      }
-    }
 
-    function navigate(route) {
-      loadContent(route);
-    }
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email:    <a href="mailto:lincoln.cobra@gmail.com">lincoln.cobra@gmail.com</a></p>
+    </section>
 
-    // Initial page load
-    window.addEventListener('load', () => navigate('home'));
+  </main>
+
+  <!-- Bootstrap JS bundle -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+  <script>
+    // tiny JS: highlight current section link
+    const links = document.querySelectorAll('.nav-link');
+    links.forEach(l => l.addEventListener('click', e => {
+      links.forEach(x => x.classList.remove('active'));
+      e.target.classList.add('active');
+    }));
   </script>
-
-  <!-- Bootstrap JS (for responsive navbar toggling) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
