@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Conversion Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Consolas, Monaco, monospace;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #000000;
+            border: 1px solid #ffffff;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #000000;
+            color: #ffffff;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid #ffffff;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .calc-section {
+            background: #000000;
+            padding: 20px;
+            border: 1px solid #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .calc-section h2 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ffffff;
+            background: #000000;
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border: 2px solid #ffffff;
+            background: #111111;
+        }
+
+        .result-box {
+            background: #111111;
+            padding: 12px;
+            border: 1px solid #ffffff;
+            margin-top: 12px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid #333333;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            color: #ffffff;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .result-value {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid #ffffff;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .area-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .fraction-bar {
+            background: #333333;
+            height: 20px;
+            border: 1px solid #ffffff;
+            position: relative;
+            margin-left: 10px;
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .fraction-fill {
+            height: 100%;
+            background: #ffffff;
+            transition: width 0.3s ease;
+        }
+
+        .fraction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 6px 0;
+            padding: 6px 0;
+            border-bottom: 1px solid #333333;
+        }
+
+        .fraction-item:last-child {
+            border-bottom: none;
+        }
+
+        .fraction-label {
+            color: #ffffff;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            min-width: 60px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .calculator-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .area-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .calc-section {
+                padding: 15px;
+            }
+            
+            .calc-section h2 {
+                font-size: 1.1rem;
+            }
+            
+            .input-group input {
+                padding: 15px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+            
+            .btn {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Unit Conversion Calculator</h1>
+            <p>Convert between inches, feet, and calculate areas</p>
+        </div>
+
+        <div class="calculator-grid">
+            <!-- Inches to Feet Converter -->
+            <div class="calc-section">
+                <h2>Inches → Feet</h2>
+                <div class="input-group">
+                    <label for="inchesInput">Enter Inches:</label>
+                    <input type="number" id="inchesInput" placeholder="e.g., 56.89" step="0.01">
+                </div>
+                <button class="btn" onclick="convertInchesToFeet()">Convert</button>
+                <div class="result-box" id="inchesToFeetResult" style="display: none;">
+                    <div class="result-item">
+                        <span class="result-label">Input:</span>
+                        <span class="result-value" id="inchesInputValue"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Exact:</span>
+                        <span class="result-value" id="feetExactValue"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Rounded:</span>
+                        <span class="result-value" id="feetRoundedValue"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feet to Inches Converter -->
+            <div class="calc-section">
+                <h2>Feet → Inches</h2>
+                <div class="input-group">
+                    <label for="feetInput">Enter Feet:</label>
+                    <input type="number" id="feetInput" placeholder="e.g., 1.64" step="0.01">
+                </div>
+                <button class="btn" onclick="convertFeetToInches()">Convert</button>
+                <div class="result-box" id="feetToInchesResult" style="display: none;">
+                    <div class="result-item">
+                        <span class="result-label">Input:</span>
+                        <span class="result-value" id="feetInputValue"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Exact:</span>
+                        <span class="result-value" id="inchesExactValue"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Rounded Up:</span>
+                        <span class="result-value" id="inchesRoundedValue"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Area Calculator (Inches Input) -->
+            <div class="calc-section">
+                <h2>Area Calculator (Inches Input)</h2>
+                <div class="area-inputs">
+                    <div class="input-group">
+                        <label for="length1Input">Length (in):</label>
+                        <input type="number" id="length1Input" placeholder="e.g., 12" step="0.01">
+                    </div>
+                    <div class="input-group">
+                        <label for="width1Input">Width (in):</label>
+                        <input type="number" id="width1Input" placeholder="e.g., 12" step="0.01">
+                    </div>
+                </div>
+                <button class="btn" onclick="calculateAreaInches()">Calculate Area</button>
+                <div class="result-box" id="areaInchesResult" style="display: none;">
+                    <div class="result-item">
+                        <span class="result-label">Dimensions:</span>
+                        <span class="result-value" id="dimensionsInches"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Area (in²):</span>
+                        <span class="result-value" id="areaInSquareInches"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Area (ft²):</span>
+                        <span class="result-value" id="areaInSquareFeet"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Area Calculator (Feet Input) -->
+            <div class="calc-section">
+                <h2>Area Calculator (Feet Input)</h2>
+                <div class="area-inputs">
+                    <div class="input-group">
+                        <label for="length2Input">Length (ft):</label>
+                        <input type="number" id="length2Input" placeholder="e.g., 5" step="0.01">
+                    </div>
+                    <div class="input-group">
+                        <label for="width2Input">Width (ft):</label>
+                        <input type="number" id="width2Input" placeholder="e.g., 1" step="0.01">
+                    </div>
+                </div>
+                <button class="btn" onclick="calculateAreaFeet()">Calculate Area</button>
+                <div class="result-box" id="areaFeetResult" style="display: none;">
+                    <div class="result-item">
+                        <span class="result-label">Dimensions:</span>
+                        <span class="result-value" id="dimensionsFeet"></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Area (ft²):</span>
+                        <span class="result-value" id="areaInSquareFeetOnly"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Steel Products Reference -->
+            <div class="calc-section">
+                <h2>Steel Products Reference</h2>
+                <div class="result-box" style="display: block;">
+                    <div class="result-item">
+                        <span class="result-label">Angle Iron:</span>
+                        <span class="result-value">W x T x L</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Flat Bar:</span>
+                        <span class="result-value">T x W x L</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Black Pipe:</span>
+                        <span class="result-value">ID x L</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Square Tube:</span>
+                        <span class="result-value">W x T x L</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Round Tube:</span>
+                        <span class="result-value">OD x T x L</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Channel:</span>
+                        <span class="result-value">W x T x L</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">I-Beam:</span>
+                        <span class="result-value">W x T x L</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Square Solid Bar:</span>
+                        <span class="result-value">T x L</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Round Solid Bar:</span>
+                        <span class="result-value">OD x L</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Galvanized Sheet:</span>
+                        <span class="result-value">T x SQFT</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Paint Lock:</span>
+                        <span class="result-value">T x SQFT</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Plate Steel:</span>
+                        <span class="result-value">T x SQFT</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Mild Sheet Steel:</span>
+                        <span class="result-value">T x SQFT</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Expanded Steel:</span>
+                        <span class="result-value">T x SQFT</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Imperial Fractions Reference -->
+            <div class="calc-section">
+                <h2>Imperial Fractions Reference</h2>
+                <div class="result-box" style="display: block;">
+                    <div class="fraction-item">
+                        <span class="fraction-label">1/16"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 6.25%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">1/8"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 12.5%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">3/16"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 18.75%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">1/4"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">5/16"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 31.25%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">3/8"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 37.5%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">7/16"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 43.75%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">1/2"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">9/16"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 56.25%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">5/8"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 62.5%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">11/16"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 68.75%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">3/4"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">13/16"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 81.25%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">7/8"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 87.5%;"></div>
+                        </div>
+                    </div>
+                    <div class="fraction-item">
+                        <span class="fraction-label">15/16"</span>
+                        <div class="fraction-bar">
+                            <div class="fraction-fill" style="width: 93.75%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function convertInchesToFeet() {
+            const inches = parseFloat(document.getElementById('inchesInput').value);
+            
+            if (isNaN(inches)) {
+                alert('Please enter a valid number for inches');
+                return;
+            }
+
+            const feetExact = inches / 12;
+            const feetRounded = Math.ceil(feetExact); // Round up to nearest integer
+
+            document.getElementById('inchesInputValue').textContent = `${inches} in`;
+            document.getElementById('feetExactValue').textContent = `${feetExact.toFixed(2)} ft (Exact)`;
+            document.getElementById('feetRoundedValue').textContent = `${feetRounded} ft (Rounded)`;
+            
+            document.getElementById('inchesToFeetResult').style.display = 'block';
+        }
+
+        function convertFeetToInches() {
+            const feet = parseFloat(document.getElementById('feetInput').value);
+            
+            if (isNaN(feet)) {
+                alert('Please enter a valid number for feet');
+                return;
+            }
+
+            const inchesExact = feet * 12;
+            const inchesRounded = Math.ceil(inchesExact); // Round up
+
+            document.getElementById('feetInputValue').textContent = `${feet} ft`;
+            document.getElementById('inchesExactValue').textContent = `${inchesExact.toFixed(2)} in (Exact)`;
+            document.getElementById('inchesRoundedValue').textContent = `${inchesRounded} in (Rounded Up)`;
+            
+            document.getElementById('feetToInchesResult').style.display = 'block';
+        }
+
+        function calculateAreaInches() {
+            const length = parseFloat(document.getElementById('length1Input').value);
+            const width = parseFloat(document.getElementById('width1Input').value);
+            
+            if (isNaN(length) || isNaN(width)) {
+                alert('Please enter valid numbers for both length and width');
+                return;
+            }
+
+            const areaInSquareInches = length * width;
+            const areaInSquareFeet = areaInSquareInches / 144; // 144 square inches = 1 square foot
+
+            document.getElementById('dimensionsInches').textContent = `${length} in × ${width} in`;
+            document.getElementById('areaInSquareInches').textContent = `${areaInSquareInches.toFixed(2)} in²`;
+            document.getElementById('areaInSquareFeet').textContent = `${areaInSquareFeet.toFixed(2)} ft²`;
+            
+            document.getElementById('areaInchesResult').style.display = 'block';
+        }
+
+        function calculateAreaFeet() {
+            const length = parseFloat(document.getElementById('length2Input').value);
+            const width = parseFloat(document.getElementById('width2Input').value);
+            
+            if (isNaN(length) || isNaN(width)) {
+                alert('Please enter valid numbers for both length and width');
+                return;
+            }
+
+            const areaInSquareFeet = length * width;
+
+            document.getElementById('dimensionsFeet').textContent = `${length} ft × ${width} ft`;
+            document.getElementById('areaInSquareFeetOnly').textContent = `${areaInSquareFeet.toFixed(2)} ft²`;
+            
+            document.getElementById('areaFeetResult').style.display = 'block';
+        }
+
+        // Add Enter key support for all inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('inchesInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') convertInchesToFeet();
+            });
+            
+            document.getElementById('feetInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') convertFeetToInches();
+            });
+            
+            document.getElementById('length1Input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') calculateAreaInches();
+            });
+            
+            document.getElementById('width1Input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') calculateAreaInches();
+            });
+            
+            document.getElementById('length2Input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') calculateAreaFeet();
+            });
+            
+            document.getElementById('width2Input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') calculateAreaFeet();
+            });
+        });
+    </script>
+</body>
+</html>
