@@ -1,0 +1,129 @@
+:root {
+    --shell-padding: 16px;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #ccc;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    flex-shrink: 0;
+}
+
+.content {
+    flex: 1;
+    margin: var(--shell-padding);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    overflow: hidden;
+}
+
+/* Tab strip look preserved but now they are links */
+.app-tabs {
+    margin: 0;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: center;
+}
+
+.app-tabs a {
+    padding: .5rem 1rem;
+    display: inline-block;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+}
+
+.app-tabs a.active {
+    background: #fff;
+    border-bottom-color: #fff;
+}
+
+/* The main view container should not scroll; inner components handle their own scrolling */
+#view {
+    flex: 1 1 auto;
+    overflow: hidden;
+    padding: 20px;
+    min-height: 0;
+    background: #fff;
+}
+
+/* Your plot/table containers keep their sizing semantics */
+#vis-div {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#combined-plot-div {
+    width: 100%;
+    flex: 1;
+    min-height: 400px;
+}
+
+#table-div {
+    flex: 1;
+    /* inner scrollable area with padding */
+    padding: var(--shell-padding);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* Make gridjs wrapper fill height and scroll internally */
+.gridjs-wrapper {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* Ensure flex children can shrink properly (prevent overflowing) */
+.flex-fill {
+    min-height: 0;
+}
+
+/* Allow column flex containers that fill height to be bounded */
+.d-flex.flex-column.h-100 {
+    height: 100%;
+    min-height: 0;
+}
+
+/* Card container for table: allow it to shrink and let card-body scroll */
+.table-card-container {
+    min-height: 0;
+    height: 100%;
+}
+
+/* Ensure flex-fill and flex containers used around cards can shrink */
+.flex-fill,
+.flex-fill.d-flex,
+.flex-fill.d-flex.flex-column {
+    min-height: 0;
+}
+
+/* Card body should be the scrolling region */
+.card-body-main-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.logo {
+    max-width: 64px;
+    height: auto;
+}

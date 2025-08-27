@@ -1,0 +1,35 @@
+<!-- Run View -->
+<div class="card mb-4">
+  <div class="card-header">Simulation Input</div>
+  <div class="card-body">
+    
+    <!-- Start/End Date Input -->
+    <div class="mb-3">
+      <label for="start-date" class="form-label">Start Date</label>
+      <input type="date" class="form-control" id="start-date" value="2024-01-01">
+      <div class="form-text" id="basic-addon4">Dates available: 01/01/2024 - 04/30/2024</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="end-date" class="form-label">End Date</label>
+      <input type="date" class="form-control" id="end-date" value="2024-02-01">
+      <div class="form-text" id="basic-addon4">Dates available: 01/01/2024 - 04/30/2024</div>
+    </div>
+
+    <div class="input-group">
+      <button class="btn btn-primary" type="submit" onclick="runSimulation(
+        document.getElementById('start-date').value,
+        document.getElementById('end-date').value
+      )">Run Simulation</button>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">Simulation Output</div>
+  <div class="card-body">
+    <div id="sim-error" class="alert alert-danger d-none" role="alert">Simulation failed. Please check your input parameters.</div>
+    <div id="sim-running" class="alert alert-warning d-none" role="alert">Simulation is still running. Please wait for it to complete.</div>
+    <div id="sim-success" class="alert alert-success d-none" role="alert">Simulation succeeded. Your results are ready, go to the Results tab to view them.</div>
+  </div>
+</div>

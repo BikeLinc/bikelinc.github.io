@@ -1,0 +1,70 @@
+<!-- Plot View -->
+<div class="d-flex flex-column h-100">
+  <div id="plot-container" class="flex-fill d-flex plot-transition" style="min-height:0;">
+    <div class="card flex-fill d-flex flex-column h-100">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Plot Viewer</span>
+        <button id="toggle-plot-settings-btn" class="btn btn-sm btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#plot-settings-body" aria-expanded="false" aria-controls="plot-settings-body">⚙️</button>
+      </div>
+      <div id="plot-settings-body" class="collapse card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Timeseries</label>
+              <div class="dropdown w-100">
+                <button id="timeseriesDropdown" class="btn btn-outline-primary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                  Select series
+                </button>
+                <ul id="timeseries-menu" class="dropdown-menu w-100" aria-labelledby="timeseriesDropdown" style="max-height: 320px; overflow: auto;">
+                  <!-- Populated dynamically from headers -->
+                </ul>
+              </div>
+            </div>
+            <div class="mb-3 mt-2">
+              <label for="resolution-select" class="form-label">Resolution</label>
+              <select class="form-select w-100" id="resolution-select" aria-label="Edit Viewing Resolution">
+                <option selected>Select Resolution</option>
+                <option value="daily">Daily</option>
+                <option value="hourly">Hourly</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="start-datetime" class="form-label">Start</label>
+              <input type="datetime-local" class="form-control" id="start-datetime">
+            </div>
+            <div class="mb-3 mt-2">
+              <label for="end-datetime" class="form-label">End</label>
+              <input type="datetime-local" class="form-control" id="end-datetime">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body flex-fill h-100" id="vis-div" style="min-height: 0; overflow: auto;">
+        <div id="combined-plot-div" style="height:100%; width:100%;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CSS Animations for plot view settings -->
+
+<style>
+  .plot-transition {
+    transition: height 300ms ease;
+    overflow: hidden;
+  }
+  
+  #plot-settings-body.collapse:not(.show) {
+    display: none !important;
+    padding: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .card.settings-collapsed {
+    margin-bottom: 0 !important;
+  }
+</style>

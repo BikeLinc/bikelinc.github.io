@@ -1,0 +1,68 @@
+<!-- Table View -->
+<div class="d-flex flex-column h-100">
+  <div class="row flex-shrink-0">
+    <div class="col-md-8 mb-3 d-flex">
+      <div class="card flex-fill h-100">
+        <div class="card-header">Key Metrics</div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div class="text-center flex-fill">
+              <div class="display-4 fw-bold text-primary">#</div>
+              <div class="h5 text-primary">Watts</div>
+              <div class="text-muted">AC Power - Simulated</div>
+            </div>
+            <div class="text-center flex-fill">
+              <div class="display-4 fw-bold text-primary">#</div>
+              <div class="h5 text-primary">Volts</div>
+              <div class="text-muted">DC Voltage - Simulated</div>
+            </div>
+            <div class="text-center flex-fill">
+              <div class="display-4 fw-bold text-primary">#</div>
+              <div class="h5 text-primary">Amps</div>
+              <div class="text-muted">DC Current - Simulated</div>
+            </div>
+
+            <div class="text-center flex-fill">
+              <div class="display-4 fw-bold text-success">#</div>
+              <div class="h5 text-success">Watts</div>
+              <div class="text-muted">AC Power - Measured</div>
+            </div>
+            <div class="text-center flex-fill">
+              <div class="display-4 fw-bold text-success">#</div>
+              <div class="h5 text-success">Volts</div>
+              <div class="text-muted">DC Voltage - Measured</div>
+            </div>
+            <div class="text-center flex-fill">
+              <div class="display-4 fw-bold text-success">#</div>
+              <div class="h5 text-success">Amps</div>
+              <div class="text-muted">DC Current - Measured</div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4 mb-3 d-flex">
+      <div class="card flex-fill h-100">
+        <div class="card-header">Data Center</div>
+        <div class="card-body">
+          <div class="mb-3 mt-2">
+            <label class="form-label">Download Data</label>
+            <button id="download-csv-btn" class="btn btn-primary w-100" type="button">Download CSV</button>
+            <div class="form-text">Downloads the currently displayed dataset.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-fill d-flex mb-3">
+    <div class="card flex-fill d-flex flex-column table-card-container">
+      <div class="card-header">Spreadsheet Viewer</div>
+      <div class="card-body flex-fill d-flex flex-column card-body-main-content">
+        <div id="table-div"></div>
+      </div>
+    </div>
+  </div>
+</div>
