@@ -6,16 +6,30 @@
   <title>More coming soon! - Blog</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: #121212; color: #e0e0e0; font-family: monospace; min-height:100vh }
-    a{ color: #801f7a }
+    :root {
+      --bg: #f7f8fb;
+      --surface: #ffffff;
+      --ink: #1d2433;
+      --muted: #5b667a;
+      --accent: #0f4c81;
+      --accent-2: #1f6fb2;
+      --border: #e2e6ef;
+    }
+    body { background: radial-gradient(1200px 800px at 10% -10%, #eaf1fb 0, #f7f8fb 55%); color: var(--ink); font-family: "IBM Plex Sans", "Source Sans 3", "Noto Sans", "Segoe UI", system-ui, sans-serif; min-height:100vh; line-height:1.6 }
+    a{ color: var(--accent); text-decoration:none }
+    a:hover{ color: var(--accent-2); text-decoration:underline }
     .container{ max-width:900px }
-    .post-card{ background:#1e1e1e; border:1px solid #333; border-radius:8px; padding:2rem; margin-top:2rem }
-    .post-title{ color:#801f7a }
-    .post-meta{ color:#b0b0b0; margin-bottom:1rem }
+    .post-card{ background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:2rem; margin-top:2rem; box-shadow:0 10px 24px rgba(16,24,40,0.06) }
+    .post-title{ color: var(--ink) }
+    .post-meta{ color: var(--muted); margin-bottom:1rem }
+    .navbar{ background: var(--surface) !important; border-bottom:1px solid var(--border) }
+    .navbar-brand, .nav-link{ color: var(--ink) !important }
+    .nav-link:hover{ color: var(--accent) !important }
+    .nav-link.active{ color: var(--accent) !important; font-weight:600 }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand" href="../index.html">Lincoln Scheer</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

@@ -9,38 +9,68 @@
     rel="stylesheet"
   >
   <style>
-    body {
-      background: #121212;
-      color: #e0e0e0;
-      font-family: monospace;
+    :root {
+      --bg: #f7f8fb;
+      --surface: #ffffff;
+      --ink: #1d2433;
+      --muted: #5b667a;
+      --accent: #0f4c81;
+      --accent-2: #1f6fb2;
+      --border: #e2e6ef;
     }
-    a { color: #801f7a; text-decoration: underline; }
-    a:hover { text-decoration: underline; }
-    .card { background: #d2d2d2; border: none; }
-    .btn-outline-info { font-family: monospace; }
-    
+    body {
+      background: radial-gradient(1200px 800px at 10% -10%, #eaf1fb 0, #f7f8fb 55%);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", "Source Sans 3", "Noto Sans", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent-2); text-decoration: underline; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 24px rgba(16, 24, 40, 0.06);
+    }
+    .btn-outline-info { font-family: inherit; }
+
     /* Navbar styling */
+    .navbar {
+      background: var(--surface) !important;
+      border-bottom: 1px solid var(--border);
+    }
     .navbar-brand {
-      font-family: monospace;
-      font-weight: bold;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink) !important;
     }
     .navbar-nav .nav-link {
-      font-family: monospace;
-      color: #e0e0e0 !important;
+      color: var(--muted) !important;
+      font-weight: 500;
     }
     .navbar-nav .nav-link:hover {
-      color: #801f7a !important;
+      color: var(--accent) !important;
     }
     .navbar-nav .nav-link.active {
-      color: #801f7a !important;
-      font-weight: bold;
+      color: var(--accent) !important;
+      font-weight: 600;
+    }
+    .section-title {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+    }
+    .subtle {
+      color: var(--muted);
+    }
+    ul {
+      padding-left: 1.2rem;
     }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand" href="index.html">Lincoln Scheer</a>
       
@@ -53,12 +83,6 @@
           <li class="nav-item">
             <a class="nav-link active" href="index.html">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="blog.html">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="resume.pdf" target="_blank">Resume</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -68,15 +92,14 @@
   <main class="container my-5 flex-grow-1">
 
     <section id="about" class="mb-5">
-      <h1>Lincoln Scheer</h1>
-      <p>Computer Engineer & Researcher</p>
+      <h1 class="section-title">Lincoln Scheer</h1>
+      <p class="subtle">Computer Engineer & Researcher</p>
     </section>
 
     <section id="intro" class="mb-5">
-        <h3>Welcome to my personal website!</h3>
-        <p>I'm Lincoln Scheer, a Computer Engineering student at Fort Lewis College in Durango, Colorado.</p>
-        <h3>About Me</h3>
-        <p>I am a senior BSCE student at Fort Lewis College.</p>
+        <h3 class="section-title">Welcome</h3>
+        <p>I'm Lincoln Scheer, a Computer Engineering graduate of Fort Lewis College, based in Orange County. I'm actively engaged as a Remote Software Engineer at the Mixed Reality Lab at Fort Lewis College, building AR/VR simulations, PV system simulations, and containerized cloud web applications.</p>
+        <h3 class="section-title">About Me</h3>
 
         <p>I have experience in various programming languages, including:</p>
 
@@ -95,11 +118,7 @@
             
         <p>I also have experience working with microcontrollers for environmental air-quality applications. On top of that, I have hands-on expertise in nano-fabrication and I just wrapped up two-semesters of overseeing photolithography processes for our senior project, where successfully built functional PMOS MOSFETs.</p>
     
-        <h3>Hobbies</h3>
-
-        <p>In my free time I enjoy hiking, biking, and hanging out with my cat <strong>Corpse Grinder</strong>. I also enjoy writing rendering engines and game engines. I have a few projects on <a href="https://github.com/bikelinc">GitHub</a> that I am working on.</p>
-
-        <h3>Projects</h3>
+        <h3 class="section-title">Projects</h3>
 
         <div class="row">
             <div class="col-md-12 mb-3">
@@ -107,7 +126,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Current Projects</h5>
                         <ul>
-                            <li>Sunnyside Solar Web App - A web application for simulating solar panel production at the Sunnyside Solar Farm in Durango, CO.</li>
+                            <li>Sunnyside Solar Web App — Builds PV production simulations for the Sunnyside Solar Farm, with interactive visualization and scenario analysis. <a href="https://fortlewis.edu/sunnyside">fortlewis.edu/sunnyside</a></li>
                         </ul>
                     </div>
                 </div>
@@ -120,9 +139,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Academic Projects</h5>
                         <ul>
-                            <li>PMOS MOSFET Fabrication – Led photolithography and fabrication processes for senior project.</li>
-                            <li>Microcontroller-based Air Quality Monitoring – Developed embedded systems for environmental data collection.</li>
-                            <li>EDA Tool Proficiency – Designed circuits using Autodesk Eagle, LT Spice, Electric VLSI, and Cadence.</li>
+                            <li>PMOS MOSFET Fabrication — Led photolithography and fabrication for 2” silicon wafers, including process development and verification.</li>
+                            <li>Microcontroller-based Air Quality Monitoring — Built embedded data acquisition systems for long-term environmental deployments.</li>
+                            <li>EDA & Mixed-Signal Design — Designed circuits and layouts using Autodesk Eagle, LT Spice, Electric VLSI, and Cadence.</li>
                         </ul>
                     </div>
                 </div>
@@ -132,11 +151,32 @@
                     <div class="card-body">
                         <h5 class="card-title">Personal & Web Projects</h5>
                         <ul>
-                            <li><a href="https://flcnanolab.github.io/">Fort Lewis College Nanofabrication Lab Website</a></li>
-                            <li><a href="https://chloewalsh.net/">Chloe Walsh - Portfolio</a></li>
-                            <li><a href="https://github.com/BikeLinc/NelsonEngine">Nelson Engine</a></li>
-                            <li><a href="https://github.com/BikeLinc/BuildTool">BuildTool</a></li>
-                            <li><a href="https://vegetarianglass.com/">Vegetarian Glass</a></li>
+                            <li><a href="https://flcnanolab.github.io/">Fort Lewis College Nanofabrication Lab Website</a>
+                              <ul>
+                                <li>Research lab site with documentation and updates.</li>
+                                <li>Uses dynamic rendered markdown for content management.</li>
+                              </ul>
+                            </li>
+                            <li><a href="https://chloewalsh.net/">Portfolio for Chloe Walsh</a>
+                              <ul>
+                                <li>Clean, fast personal portfolio site.</li>
+                              </ul>
+                            </li>
+                            <li><a href="https://github.com/BikeLinc/NelsonEngine">Nelson Engine</a>
+                              <ul>
+                                <li>C++ rendering/game engine.</li>
+                              </ul>
+                            </li>
+                            <li><a href="https://github.com/BikeLinc/BuildTool">BuildTool</a>
+                              <ul>
+                                <li>Build automation tooling.</li>
+                              </ul>
+                            </li>
+                            <li><a href="https://vegetarianglass.com/">Online Gallery for Vegetarian Glass</a>
+                              <ul>
+                                <li>Showcases artwork and products made from glass.</li>
+                              </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -145,10 +185,14 @@
 
     </section>
 
+    <section id="hobbies" class="mb-5">
+      <h3 class="section-title">Hobbies</h3>
+      <p>In my free time I enjoy hiking, biking, and hanging out with my cat Corpse Grinder. I also enjoy writing rendering engines and game engines. I have a few projects on <a href="https://github.com/bikelinc">GitHub</a> that I am working on.</p>
+    </section>
 
     <section id="contact">
-      <h2>Contact</h2>
-      <p>Email:    <a href="mailto:lincoln.cobra@gmail.com">lincoln.cobra@gmail.com</a></p>
+      <h2 class="section-title">Contact</h2>
+      <p>Email: <a href="mailto:lincoln.alban.scheer@gmail.com">lincoln.alban.scheer@gmail.com</a></p>
     </section>
 
   </main>
